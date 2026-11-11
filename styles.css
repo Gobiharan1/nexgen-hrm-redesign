@@ -175,6 +175,28 @@ h1 { font-size: clamp(2rem,4vw,3.25rem); letter-spacing: -.052em; text-wrap: bal
 .button.secondary { color: #fff; border-color: #daeaf6; }
 .button.secondary:hover { background: #ffffff20; }
 .button:focus-visible { outline-color: #fff; }
+.apply-dialog {
+  width: min(480px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  padding: var(--panel-space);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 16px 60px #08294740;
+}
+.apply-dialog::backdrop { background: #082947b8; }
+.apply-dialog p { margin-top: 14px; color: var(--body); }
+.apply-dialog .actions { margin-top: 24px; }
+.apply-dialog .button:focus-visible { outline-color: #1977b0; }
+.dialog-close {
+  border-color: var(--line);
+  background: #fff;
+  color: var(--ink);
+  font-family: inherit;
+  cursor: pointer;
+}
+.dialog-close:hover { background: var(--panel); }
 footer { color: var(--body); border-top: 1px solid var(--line); font-size: .75rem; }
 .foot { display: flex; justify-content: space-between; gap: 9px 20px; padding-block: 22px; }
 .foot a { flex: none; font-weight: 600; }

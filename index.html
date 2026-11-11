@@ -130,12 +130,30 @@
     <section class="admissions" id="enquire" aria-labelledby="enquire-title">
       <div><h2 id="enquire-title">Ask about the next intake</h2><p>Get help with application steps, fees and class times.</p></div>
       <div class="actions">
-        <a class="button primary" href="https://nexgen.lk/contact/">Apply now <span aria-hidden="true">↗</span></a>
+        <a class="button primary" id="apply-now" href="https://nexgen.lk/contact/" aria-haspopup="dialog">Apply now <span aria-hidden="true">↗</span></a>
         <a class="button secondary" href="assets/nexgen-hr-diploma-brochure.pdf" download>Download brochure <span aria-hidden="true">↓</span></a>
       </div>
     </section>
   </div>
 </main>
+<dialog class="apply-dialog" id="apply-dialog" aria-labelledby="apply-title" aria-describedby="apply-description">
+  <h2 id="apply-title">Apply for the HR Diploma</h2>
+  <p id="apply-description">To apply for the Diploma in Human Resource Management, continue to NexGen’s contact form and include the course name in your message.</p>
+  <form class="actions" method="dialog">
+    <a class="button primary" id="continue-to-nexgen" href="https://nexgen.lk/contact/">Continue to NexGen <span aria-hidden="true">↗</span></a>
+    <button class="button dialog-close" type="submit" autofocus>Close</button>
+  </form>
+</dialog>
 <footer><div class="wrap foot"><span>NexGen Education <span aria-hidden="true">·</span> Diploma in Human Resource Management</span><a href="#overview">Back to top ↑</a></div></footer>
+<script>
+  const applyLink = document.getElementById('apply-now');
+  const applyDialog = document.getElementById('apply-dialog');
+
+  applyLink.addEventListener('click', (event) => {
+    if (typeof applyDialog.showModal !== 'function') return;
+    event.preventDefault();
+    applyDialog.showModal();
+  });
+</script>
 </body>
 </html>
