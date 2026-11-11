@@ -1,0 +1,139 @@
+:root {
+  --motion-fast: 160ms;
+  --motion-enter: 240ms;
+  --motion-ease: cubic-bezier(.2, .65, .3, 1);
+}
+
+.button,
+.dialog-close {
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) var(--motion-ease);
+}
+
+.button > span[aria-hidden="true"] {
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+
+.head nav a,
+.breadcrumb a,
+.page-nav a,
+.foot a {
+  text-underline-offset: .28em;
+  transition: color var(--motion-fast) ease;
+}
+
+.head .nav-contact {
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease;
+}
+
+.facts > div {
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) var(--motion-ease);
+}
+
+.modules li {
+  transition: background-color var(--motion-fast) ease;
+}
+
+.apply-field input,
+.apply-field textarea {
+  transition:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
+}
+
+.button:not(:disabled):active,
+.dialog-close:active {
+  transform: translateY(1px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px #08294726;
+  }
+
+  .button.primary:not(:disabled):hover > span[aria-hidden="true"] {
+    transform: translate(2px, -2px);
+  }
+
+  .button[download]:hover > span[aria-hidden="true"] {
+    transform: translateY(2px);
+  }
+
+  .button:not(:disabled):active {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+
+  .head .nav-contact:hover {
+    background: #eef5fb;
+    border-color: #a8bed0;
+  }
+
+  .facts > div:hover {
+    transform: translateY(-3px);
+    border-color: #b8d1e5;
+    box-shadow: 0 12px 26px #1036531c;
+  }
+
+  .modules li:hover {
+    background-color: #eef5fb;
+  }
+
+  .apply-field input:hover,
+  .apply-field textarea:hover {
+    border-color: #789ab6;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .apply-dialog[open] {
+    animation: application-enter var(--motion-enter) var(--motion-ease) both;
+  }
+
+  .apply-dialog[open]::backdrop {
+    animation: backdrop-enter var(--motion-fast) ease-out both;
+  }
+}
+
+@keyframes application-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes backdrop-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+  }
+
+  .button:not(:disabled):is(:hover, :active),
+  .dialog-close:active,
+  .button:not(:disabled):hover > span[aria-hidden="true"],
+  .facts > div:hover {
+    transform: none;
+  }
+}
