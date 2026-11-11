@@ -4,4 +4,4 @@ A responsive redesign of the [existing NexGen course page](https://nexgen.lk/dip
 
 The supplied course brief is the source for the proposed 3-month duration, 12 modules, schedule and delivery options, entry requirements, learning objectives, target audience, and career pathways. The existing live page lists different course details; NexGen should verify the proposed copy before replacing the live page. The awarding body was left blank in the brief. Fees and credits were marked N/A, so the page refers those questions to admissions. Enquiry links use NexGen’s existing contact channels and do not collect data on this page.
 
-The logo and the original course photograph (Mikhail Nilov / Pexels) were sourced from the NexGen site. Page styles and colour variables live in `styles.css`.
+The logo and the original course photograph (Mikhail Nilov / Pexels) were sourced from the NexGen site. Page styles and colour variables live in `styles.css`. Poppins is bundled locally under the SIL Open Font License (see `assets/fonts/OFL-Poppins.txt`).
