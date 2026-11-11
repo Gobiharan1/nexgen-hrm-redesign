@@ -138,21 +138,80 @@
 </main>
 <dialog class="apply-dialog" id="apply-dialog" aria-labelledby="apply-title" aria-describedby="apply-description">
   <h2 id="apply-title">Apply for the HR Diploma</h2>
-  <p id="apply-description">To apply for the Diploma in Human Resource Management, continue to NexGen’s contact form and include the course name in your message.</p>
-  <form class="actions" method="dialog">
-    <a class="button primary" id="continue-to-nexgen" href="https://nexgen.lk/contact/">Continue to NexGen <span aria-hidden="true">↗</span></a>
-    <button class="button dialog-close" type="submit" autofocus>Close</button>
+  <p id="apply-description">Send your details to NexGen admissions to ask about applying for the Diploma in Human Resource Management.</p>
+  <form class="apply-form" id="apply-form" method="post" action="https://nexgen.lk/wp-json/contact-form-7/v1/contact-forms/135/feedback">
+    <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f135-p21-o1">
+    <input type="hidden" name="your-subject" value="Application enquiry: Diploma in Human Resource Management">
+    <label>Full name
+      <input name="your-name" type="text" autocomplete="name" maxlength="400" required autofocus>
+    </label>
+    <label>Email address
+      <input name="your-email" type="email" autocomplete="email" maxlength="400" required>
+    </label>
+    <label>Mobile or WhatsApp number
+      <input name="your-mobile" type="tel" autocomplete="tel" maxlength="400" required>
+    </label>
+    <label>Message (optional)
+      <textarea name="your-message" rows="3" maxlength="2000"></textarea>
+    </label>
+    <div class="actions">
+      <button class="button primary" type="submit">Send enquiry</button>
+      <button class="button dialog-close" type="button">Close</button>
+    </div>
+    <p class="form-status" role="status"></p>
+    <a class="form-fallback" href="https://nexgen.lk/contact/" hidden>Open NexGen’s contact page</a>
   </form>
 </dialog>
 <footer><div class="wrap foot"><span>NexGen Education <span aria-hidden="true">·</span> Diploma in Human Resource Management</span><a href="#overview">Back to top ↑</a></div></footer>
 <script>
   const applyLink = document.getElementById('apply-now');
   const applyDialog = document.getElementById('apply-dialog');
+  const applyForm = document.getElementById('apply-form');
+  const sendButton = applyForm.querySelector('[type="submit"]');
+  const formStatus = applyForm.querySelector('.form-status');
+  const formFallback = applyForm.querySelector('.form-fallback');
 
   applyLink.addEventListener('click', (event) => {
     if (typeof applyDialog.showModal !== 'function') return;
     event.preventDefault();
     applyDialog.showModal();
+  });
+
+  applyForm.querySelector('.dialog-close').addEventListener('click', () => {
+    applyDialog.close();
+  });
+
+  applyForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (sendButton.disabled) return;
+
+    sendButton.disabled = true;
+    formFallback.hidden = true;
+    formStatus.textContent = 'Sending your enquiry…';
+
+    try {
+      const response = await fetch(applyForm.action, {
+        method: 'POST',
+        body: new FormData(applyForm),
+        signal: AbortSignal.timeout(15000)
+      });
+      if (!response.ok) throw new Error('Contact service unavailable');
+
+      const result = await response.json();
+      if (result.status === 'mail_sent') {
+        applyForm.reset();
+        formStatus.textContent = 'Your enquiry was sent to NexGen admissions.';
+      } else if (result.status === 'validation_failed') {
+        formStatus.textContent = result.invalid_fields?.[0]?.message || 'Check your contact details and try again.';
+      } else {
+        throw new Error('Contact service did not confirm delivery');
+      }
+    } catch {
+      formStatus.textContent = 'We couldn’t confirm that your enquiry was sent. You can use NexGen’s contact page to follow up.';
+      formFallback.hidden = false;
+    } finally {
+      sendButton.disabled = false;
+    }
   });
 </script>
 </body>
