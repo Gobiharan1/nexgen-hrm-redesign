@@ -19,7 +19,6 @@
 
 .head nav a,
 .breadcrumb a,
-.page-nav a,
 .foot a {
   text-underline-offset: .28em;
   transition: color var(--motion-fast) ease;
@@ -39,7 +38,7 @@
     transform var(--motion-fast) var(--motion-ease);
 }
 
-.modules li {
+.modules summary {
   transition: background-color var(--motion-fast) ease;
 }
 
@@ -85,8 +84,8 @@
     box-shadow: 0 12px 26px #1036531c;
   }
 
-  .modules li:hover {
-    background-color: #eef5fb;
+  .modules summary:hover {
+    background-color: #dceaf5;
   }
 
   .apply-field input:hover,
