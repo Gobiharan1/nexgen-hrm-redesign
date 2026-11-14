@@ -1,11 +1,9 @@
 :root {
   --motion-fast: 160ms;
-  --motion-enter: 240ms;
   --motion-ease: cubic-bezier(.2, .65, .3, 1);
 }
 
-.button,
-.dialog-close {
+.button {
   transition:
     background-color var(--motion-fast) ease,
     border-color var(--motion-fast) ease,
@@ -49,8 +47,7 @@
     border-color var(--motion-fast) ease;
 }
 
-.button:not(:disabled):active,
-.dialog-close:active {
+.button:not(:disabled):active {
   transform: translateY(1px);
 }
 
@@ -98,30 +95,6 @@
   html {
     scroll-behavior: smooth;
   }
-
-  .apply-dialog[open] {
-    animation: application-enter var(--motion-enter) var(--motion-ease) both;
-  }
-
-  .apply-dialog[open]::backdrop {
-    animation: backdrop-enter var(--motion-fast) ease-out both;
-  }
-}
-
-@keyframes application-enter {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes backdrop-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -130,7 +103,6 @@
   }
 
   .button:not(:disabled):is(:hover, :active),
-  .dialog-close:active,
   .button:not(:disabled):hover > span[aria-hidden="true"],
   .facts > div:hover {
     transform: none;
